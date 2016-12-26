@@ -1,0 +1,20 @@
+<IfModule mod_rewrite.c>
+RewriteEngine On
+
+RewriteBase /SA01/
+# If your project is in server root then should be: RewriteBase /
+# If project is in folder then it should be: RewriteBase /folder_name/
+
+RewriteCond %{REQUEST_URI} ^system.*
+RewriteRule ^(.*)$ /index.php?/$1 [L]
+
+RewriteCond %{REQUEST_URI} ^application.*
+RewriteRule ^(.*)$ /index.php?/$1 [L]
+
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule ^(.*)$ index.php?/$1 [L]
+</IfModule>
+<IfModule !mod_rewrite.c>
+ErrorDocument 404 /index.php
+</IfModule>
